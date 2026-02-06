@@ -18,12 +18,12 @@ function ChatInputBox() {
     <div className='relative min-h-screen bg-gray-50 dark:bg-zinc-900 transition-colors duration-300'> 
 
         {/* Page Content Placeholder */}
-        <div>
-            <AiMultiModels />
+        <div className='h-[75vh] overflow-hidden pb-24still'>
+             <AiMultiModels />
         </div>
 
         {/* Fixed Chat Input */}
-        <div className='fixed bottom-0 left-0 right-0 w-full flex justify-center px-4 pb-6'>
+        <div className='fixed bottom-0 left-0 right-0 w-full flex justify-center px-4 pb-6 z-40'>
             <div className='w-full border border-gray-200 dark:border-zinc-700 rounded-3xl shadow-xl max-w-2xl bg-white dark:bg-zinc-800 overflow-hidden'>
                 
                 <div className='flex items-end px-3 py-2 gap-2'>

@@ -9,6 +9,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { useModelSelection } from '../_context/ModelSelectionContext';
+import { Button } from '@/components/ui/button';
 
 function AiMultiModels() {
     const { selectedModels } = useModelSelection();
@@ -24,10 +25,10 @@ function AiMultiModels() {
                 </div>
             ) : (
                 visibleModels.map((model, index) => (
-                    <div key={index} className='flex flex-col border-r last:border-r-0 h-full overflow-auto flex-1 transition-all duration-300 ease-in-out'>
+                    <div key={index} className='flex flex-col border-r last:border-r-0 h-full overflow-auto flex-1 transition-all duration-300 ease-in-out min-w-0'>
 
-                        <div className='flex w-full items-center justify-between p-4'>
-                            <div className="flex items-center gap-2">
+                        <div className='flex w-full items-center justify-between p-4 shrink-0 '>
+                            <div className="flex items-center gap-2 min-w-0">
                                 <Image
                                     src={model.icon}
                                     alt={model.model}
@@ -35,11 +36,11 @@ function AiMultiModels() {
                                     height={24}
                                     className={`rounded-md ${model.invert ? 'dark:invert' : ''}`}
                                 />
-                                <Select>
-                                    <SelectTrigger className="w-45 border-none shadow-none bg-transparent focus:ring-0">
+                                <Select modal={false}>
+                                    <SelectTrigger className="w-[180px] border-none shadow-none bg-transparent focus:ring-0">
                                         <SelectValue placeholder={model.subModel[0].name} />
                                     </SelectTrigger>
-                                    <SelectContent className="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl border-zinc-200 dark:border-zinc-700">
+                                    <SelectContent className="bg-white/80 dark:bg-zinc-800/80 backdrop-blur-xl border-zinc-200 dark:border-zinc-700 z-50">
                                         <SelectGroup>
                                             {model.subModel.map((subModel, index) => (
                                                 <SelectItem key={index} value={subModel.name}>{subModel.name}</SelectItem>
@@ -48,6 +49,11 @@ function AiMultiModels() {
                                     </SelectContent>
                                 </Select>
                             </div>
+                            <Button variant="outline" size="sm"
+                                className={!model.premium || !model.enable ? "invisible" : ""} >
+                                Upgrade to Premium
+                            </Button>
+
                         </div>
 
                         {/* Empty State */}
@@ -70,6 +76,7 @@ function AiMultiModels() {
                     </div>
                 ))
             )}
+
         </div>
     )
 }
